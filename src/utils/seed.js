@@ -1,12 +1,12 @@
 /**
- * Seed script: populates the DB with sample vendors for quick testing.
+ * Seed script: populates the DB with sample contacts for quick testing.
  * Usage: npm run seed
  */
 const mongoose = require('mongoose');
 const connectDB = require('../config/db');
-const Vendor = require('../models/vendor.model');
+const Contact = require('../models/contact.model');
 
-const sampleVendors = [
+const sampleContacts = [
   { name: 'Shree Bangle House', phone: '+919812345670', location: 'Johari Bazaar', city: 'Jaipur', businessType: 'Wholesale', notes: 'Best lac bangles' },
   { name: 'Rajwadi Churi Bhandar', phone: '+919812345671', location: 'Bapu Bazaar', city: 'Jaipur', businessType: 'Retail', notes: 'Bulk orders welcome' },
   { name: 'Meena Glass Works', phone: '+919812345672', location: 'Firozabad Road', city: 'Firozabad', businessType: 'Manufacturer', notes: 'Glass bangles supplier' },
@@ -17,9 +17,9 @@ const sampleVendors = [
 (async () => {
   try {
     await connectDB();
-    await Vendor.deleteMany({});
-    await Vendor.insertMany(sampleVendors);
-    console.log(`✅ Seeded ${sampleVendors.length} vendors`);
+    await Contact.deleteMany({});
+    await Contact.insertMany(sampleContacts);
+    console.log(`✅ Seeded ${sampleContacts.length} contacts`);
   } catch (err) {
     console.error('Seed failed:', err.message);
   } finally {

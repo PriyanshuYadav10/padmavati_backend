@@ -1,6 +1,6 @@
 # Padmavati Bangles — Backend API
 
-Node.js + Express + MongoDB REST API for vendor management. MVC architecture, validation & error-handling middleware, and a JWT auth layer prepared for the future (currently disabled).
+Node.js + Express + MongoDB REST API for contact management. MVC architecture, validation & error-handling middleware, and a JWT auth layer prepared for the future (currently disabled).
 
 ## Requirements
 - Node.js 18+
@@ -33,7 +33,7 @@ src/
 ├── config/      env + db connection
 ├── controllers/ HTTP layer (thin)
 ├── services/    business logic + data access
-├── models/      Mongoose schemas (Vendor, Settings)
+├── models/      Mongoose schemas (Contact, Settings)
 ├── routes/      route definitions
 ├── middleware/  validate, error, auth (JWT, disabled)
 ├── validators/  express-validator rule sets
@@ -44,15 +44,15 @@ src/
 
 ## Endpoints
 
-### Vendors
+### Contacts
 | Method | Path | Body / Query |
 |--------|------|--------------|
-| GET | `/api/vendors` | `?page=&limit=&sort=` |
-| GET | `/api/vendors/search` | `?q=<text>` |
-| GET | `/api/vendors/:id` | |
-| POST | `/api/vendors` | `{ name*, phone*, location, city, businessType, notes }` |
-| PUT | `/api/vendors/:id` | partial vendor |
-| DELETE | `/api/vendors/:id` | |
+| GET | `/api/contacts` | `?page=&limit=&sort=` |
+| GET | `/api/contacts/search` | `?q=<text>` |
+| GET | `/api/contacts/:id` | |
+| POST | `/api/contacts` | `{ name*, phone*, location, city, businessType, notes }` |
+| PUT | `/api/contacts/:id` | partial contact |
+| DELETE | `/api/contacts/:id` | |
 
 ### Settings
 | Method | Path | Body |
@@ -68,7 +68,7 @@ src/
 { "success": false, "message": "Validation failed", "details": [ { "field": "phone", "message": "..." } ] }
 ```
 
-## Vendor schema
+## Contact schema
 ```jsonc
 {
   "id": "ObjectId",
@@ -85,15 +85,15 @@ src/
 
 ## Example
 ```bash
-curl -X POST http://localhost:4000/api/vendors \
+curl -X POST http://localhost:4000/api/contacts \
   -H "Content-Type: application/json" \
   -d '{"name":"Shree Bangle House","phone":"+919812345670","city":"Jaipur","businessType":"Wholesale"}'
 
-curl "http://localhost:4000/api/vendors/search?q=jaipur"
+curl "http://localhost:4000/api/contacts/search?q=jaipur"
 ```
 
 ## Enabling auth later
 1. Set `AUTH_ENABLED=true` in `.env`.
 2. Issue JWTs (a login route/controller can reuse `jsonwebtoken` + `JWT_SECRET`).
-3. `protect` middleware (already on the vendor routes) will then require `Authorization: Bearer <token>`.
+3. `protect` middleware (already on the contact routes) will then require `Authorization: Bearer <token>`.
 # padmavati_backend

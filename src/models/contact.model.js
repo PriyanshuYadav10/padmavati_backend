@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const vendorSchema = new mongoose.Schema(
+const contactSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, 'Vendor name is required'],
+      required: [true, 'Contact name is required'],
       trim: true,
       maxlength: [120, 'Name cannot exceed 120 characters'],
     },
@@ -54,7 +54,7 @@ const vendorSchema = new mongoose.Schema(
 );
 
 // Text index powers the free-text search endpoint.
-vendorSchema.index({
+contactSchema.index({
   name: 'text',
   phone: 'text',
   location: 'text',
@@ -63,4 +63,4 @@ vendorSchema.index({
   notes: 'text',
 });
 
-module.exports = mongoose.model('Vendor', vendorSchema);
+module.exports = mongoose.model('Contact', contactSchema);

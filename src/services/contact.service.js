@@ -1,20 +1,20 @@
-const Vendor = require('../models/vendor.model');
+const Contact = require('../models/contact.model');
 const ApiError = require('../utils/ApiError');
 
 /**
- * Vendor service — all DB access for vendors lives here (separation from
+ * Contact service — all DB access for contacts lives here (separation from
  * controllers keeps the HTTP layer thin and the logic testable).
  */
-const vendorService = {
+const contactService = {
   async create(payload) {
-    return Vendor.create(payload);
+    return Contact.create(payload);
   },
 
   async findAll({ page = 1, limit = 50, sort = '-createdAt' } = {}) {
     const skip = (Number(page) - 1) * Number(limit);
     const [items, total] = await Promise.all([
-      Vendor.find().sort(sort).skip(skip).limit(Number(limit)),
-      Vendor.countDocuments(),
+      Contact.find().sort(sort).skip(skip).limit(Number(limit)),
+      Contact.countDocuments(),
     ]);
     return {
       items,
@@ -23,24 +23,24 @@ const vendorService = {
   },
 
   async findById(id) {
-    const vendor = await Vendor.findById(id);
-    if (!vendor) throw ApiError.notFound('Vendor not found');
-    return vendor;
+    const contact = await Contact.findById(id);
+    if (!contact) throw ApiError.notFound('Contact not found');
+    return contact;
   },
 
   async update(id, payload) {
-    const vendor = await Vendor.findByIdAndUpdate(id, payload, {
+    const contact = await Contact.findByIdAndUpdate(id, payload, {
       new: true,
       runValidators: true,
     });
-    if (!vendor) throw ApiError.notFound('Vendor not found');
-    return vendor;
+    if (!contact) throw ApiError.notFound('Contact not found');
+    return contact;
   },
 
   async remove(id) {
-    const vendor = await Vendor.findByIdAndDelete(id);
-    if (!vendor) throw ApiError.notFound('Vendor not found');
-    return vendor;
+    const contact = await Contact.findByIdAndDelete(id);
+    if (!contact) throw ApiError.notFound('Contact not found');
+    return contact;
   },
 
   /**
@@ -49,11 +49,11 @@ const vendorService = {
    */
   async search(q) {
     if (!q || !q.trim()) {
-      return Vendor.find().sort('-createdAt');
+      return Contact.find().sort('-createdAt');
     }
     const safe = q.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const rx = new RegExp(safe, 'i');
-    return Vendor.find({
+    return Contact.find({
       $or: [
         { name: rx },
         { phone: rx },
@@ -66,4 +66,4 @@ const vendorService = {
   },
 };
 
-module.exports = vendorService;
+module.exports = contactService;

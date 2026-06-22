@@ -1,7 +1,7 @@
 {
   "name": "padmavati-bangles-backend",
   "version": "1.0.0",
-  "description": "Vendor Management REST API for the Padmavati Bangles application",
+  "description": "Contact Management REST API for the Padmavati Bangles application",
   "main": "src/server.js",
   "type": "commonjs",
   "scripts": {
@@ -10,7 +10,7 @@
     "seed": "node src/utils/seed.js"
   },
   "keywords": [
-    "vendor-management",
+    "contact-management",
     "express",
     "mongodb",
     "rest-api"

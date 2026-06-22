@@ -25,7 +25,7 @@ if (env.nodeEnv !== 'test') {
 
 // Root
 app.get('/', (req, res) => {
-  res.json({ success: true, message: 'Padmavati Bangles Vendor Management API', docs: '/api/health' });
+  res.json({ success: true, message: 'Padmavati Bangles Contact Management API', docs: '/api/health' });
 });
 
 // API

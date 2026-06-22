@@ -1,6 +1,6 @@
 const { body, param, query } = require('express-validator');
 
-const createVendorRules = [
+const createContactRules = [
   body('name').trim().notEmpty().withMessage('Name is required').isLength({ max: 120 }),
   body('phone')
     .trim()
@@ -14,8 +14,8 @@ const createVendorRules = [
   body('notes').optional().trim().isLength({ max: 1000 }),
 ];
 
-const updateVendorRules = [
-  param('id').isMongoId().withMessage('Invalid vendor id'),
+const updateContactRules = [
+  param('id').isMongoId().withMessage('Invalid contact id'),
   body('name').optional().trim().notEmpty().withMessage('Name cannot be empty').isLength({ max: 120 }),
   body('phone')
     .optional()
@@ -28,8 +28,8 @@ const updateVendorRules = [
   body('notes').optional().trim().isLength({ max: 1000 }),
 ];
 
-const idParamRule = [param('id').isMongoId().withMessage('Invalid vendor id')];
+const idParamRule = [param('id').isMongoId().withMessage('Invalid contact id')];
 
 const searchRules = [query('q').optional().trim().isLength({ max: 200 })];
 
-module.exports = { createVendorRules, updateVendorRules, idParamRule, searchRules };
+module.exports = { createContactRules, updateContactRules, idParamRule, searchRules };
